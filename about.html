@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>About Daniel – PrimeLayer Analytics</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Learn more about Daniel, a finance and data analyst based in Belgium who combines banking, asset management and high-performance training to build clear, powerful data systems." />
+  <meta name="robots" content="index, follow" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-transition about-page">
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <div class="wrapper navbar">
+    <a href="index.html" class="logo-wrap" aria-label="PrimeLayer Analytics home">
+      <div class="logo-mark"></div>
+      <div class="logo-text">PrimeLayer Analytics</div>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-label="Toggle main navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html" aria-current="page" class="active">About</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+  <section class="hero hero-compact reveal" aria-labelledby="about-hero-title" style="--reveal-delay: 0.05s;">
+    <div class="wrapper hero-grid hero-grid-single">
+      <div>
+        <p class="hero-kicker">About Daniel</p>
+        <h1 id="about-hero-title" class="hero-title">
+          Data-driven by training,
+          <span class="hero-highlight">disciplined by design</span>.
+        </h1>
+        <p class="hero-subtitle">
+          I'm Daniel, a finance and data analyst based in Belgium. I combine a
+          background in banking and asset management with a high-performance
+          mindset built in the gym. I help businesses transform scattered, messy,
+          or underused data into clear, actionable insights — using the same
+          principles of precision, discipline, and consistency that drive serious
+          training.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrapper two-column">
+      <article class="reveal" style="--reveal-delay: 0.1s;">
+        <header class="section-header">
+          <p class="section-kicker">Who I am</p>
+          <h2 id="who-i-am" class="section-title">
+            A data analyst focused on clarity, precision, and impact.
+          </h2>
+        </header>
+        <p class="section-subtitle">
+          I specialize in turning raw, disorganized data into dashboards,
+          insights, and tracking systems that help teams make better decisions
+          fast. My approach is structured and disciplined: I remove complexity,
+          define the core metrics that matter, and give you a clear picture of
+          where your business stands — and where it can go next.
+        </p>
+      </article>
+
+      <article class="reveal" style="--reveal-delay: 0.2s;">
+        <header class="section-header">
+          <p class="section-kicker">How I work</p>
+          <h2 class="section-title">
+            Simple process. Clear communication. Strong execution.
+          </h2>
+        </header>
+        <p class="section-subtitle">
+          Every project follows a straightforward workflow: understanding your
+          goals, auditing your data, cleaning and structuring it, building
+          dashboards you can use immediately, and giving you the tools to operate
+          independently. No unnecessary jargon or complexity — just clean,
+          reliable data systems that work.
+        </p>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrapper footer-inner">
+    <p>© <span id="year"></span> Daniel Data. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  const yearSpan = document.getElementById('year');
+  if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+
+  window.addEventListener('load', function () {
+    document.body.classList.add('page-loaded');
+  });
+
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', function () {
+      const expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', String(!expanded));
+      navLinks.classList.toggle('nav-open');
+    });
+  }
+
+  const handleLinkClick = (event) => {
+    const link = event.currentTarget;
+    const href = link.getAttribute('href') || '';
+    const target = link.getAttribute('target');
+    if (href.startsWith('#') || target === '_blank') return;
+
+    event.preventDefault();
+    document.body.classList.add('fade-out');
+    setTimeout(() => {
+      window.location.href = href;
+    }, 350);
+  };
+
+  document.querySelectorAll('a[href]').forEach(link => {
+    if (!link.hasAttribute('data-no-transition')) {
+      link.addEventListener('click', handleLinkClick);
+    }
+  });
+
+  const revealElements = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && revealElements.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealElements.forEach(el => observer.observe(el));
+  } else {
+    revealElements.forEach(el => el.classList.add('visible'));
+  }
+})();
+</script>
+</body>
+</html>

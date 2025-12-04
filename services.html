@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Services – PrimeLayer Analytics</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Discover PrimeLayer Analytics core data services: cleaning and preparation, dashboards and KPI design, business insights, automation, and custom data solutions for SMEs and finance-driven teams." />
+  <meta name="robots" content="index, follow" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-transition">
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <div class="wrapper navbar">
+    <a href="index.html" class="logo-wrap" aria-label="PrimeLayer Analytics home">
+      <div class="logo-mark"></div>
+      <div class="logo-text">PrimeLayer Analytics</div>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-label="Toggle main navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html" aria-current="page" class="active">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+  <section class="hero reveal" aria-labelledby="services-hero-title" style="--reveal-delay: 0.05s;">
+    <div class="wrapper hero-grid hero-grid-single">
+      <div>
+        <p class="hero-kicker">Services</p>
+        <h1 id="services-hero-title" class="hero-title">
+          Data services built like a training program:
+          <span class="hero-highlight">structured, intense, effective.</span>
+        </h1>
+        <p class="hero-subtitle">
+          Whether you need your data cleaned, your KPIs visualized, or your
+          reporting automated, I build systems that are simple to use, easy to
+          maintain, and built to support long-term performance.
+        </p>
+        <div class="reveal" style="--reveal-delay: 0.18s;">
+          <a href="contact.html" class="btn-primary">
+            Discuss your project
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" aria-labelledby="core-data-services" style="--reveal-delay: 0.1s;">
+    <div class="wrapper">
+      <header class="section-header">
+        <p class="section-kicker">What I do</p>
+        <h2 id="core-data-services" class="section-title">Core data services</h2>
+        <p class="section-subtitle">
+          I work with small and medium businesses, e-commerce brands,
+          consultants, logistics operators, and finance-driven companies who
+          want clearer visibility on their numbers. If you're dealing with messy
+          spreadsheets, manual reporting, scattered data sources, or a lack of
+          understandable KPIs, I help you build clean, automated, and actionable
+          data systems that support smarter decisions and stronger performance.
+        </p>
+      </header>
+
+      <div class="card-grid" aria-label="List of core data services">
+        <article class="card reveal" style="--reveal-delay: 0.14s;">
+          <div class="card-icon" aria-hidden="true"></div>
+          <h3>Data Cleaning &amp; Preparation</h3>
+          <p>
+            I transform messy, inconsistent, or incomplete datasets into clean,
+            structured, analysis-ready information. This includes removing
+            duplicates, fixing errors, standardizing formats, merging datasets,
+            defining consistent metrics, and turning your data into a reliable
+            asset that supports dashboards and reports.
+          </p>
+        </article>
+
+        <article class="card reveal" style="--reveal-delay: 0.20s;">
+          <div class="card-icon" aria-hidden="true"></div>
+          <h3>Dashboards &amp; KPI Design</h3>
+          <p>
+            I build modern, intuitive dashboards in Power BI, Tableau, or Excel,
+            tailored to the exact KPIs that matter for your business. These
+            dashboards give you instant visibility on revenue, costs,
+            operations, sales performance, customer behaviour, and any
+            indicators you need to track progress and make the right decisions
+            at the right time.
+          </p>
+        </article>
+
+        <article class="card reveal" style="--reveal-delay: 0.26s;">
+          <div class="card-icon" aria-hidden="true"></div>
+          <h3>Business Insights &amp; Analysis</h3>
+          <p>
+            Beyond dashboards, I analyze trends, patterns, and performance
+            drivers in your data to uncover what is working and what isn’t. I
+            help you understand where your growth comes from, where money is
+            lost, which products or clients generate the most value, and how to
+            optimize your operations with data-driven recommendations.
+          </p>
+        </article>
+
+        <article class="card reveal" style="--reveal-delay: 0.32s;">
+          <div class="card-icon" aria-hidden="true"></div>
+          <h3>Automation &amp; Reporting Tools</h3>
+          <p>
+            I create automated reporting pipelines using Excel models, Power BI
+            refreshes, or Python scripts. These systems eliminate repetitive
+            manual work and generate updated dashboards or reports
+            automatically — saving you time, reducing human error, and ensuring
+            your team always works with up-to-date information.
+          </p>
+        </article>
+
+        <article class="card reveal" style="--reveal-delay: 0.38s;">
+          <div class="card-icon" aria-hidden="true"></div>
+          <h3>Custom Data Solutions</h3>
+          <p>
+            If your needs don’t fit into a standard service, I design fully
+            customized data solutions for your workflow: forecasting models,
+            financial analysis tools, operational monitoring systems, CRM data
+            structuring, or tailored decision-support tools. Your problem becomes
+            a structured, automated, precise data solution.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrapper footer-inner">
+    <p>© <span id="year"></span> Daniel Data. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  const yearSpan = document.getElementById('year');
+  if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+
+  window.addEventListener('load', function () {
+    document.body.classList.add('page-loaded');
+  });
+
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', function () {
+      const expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', String(!expanded));
+      navLinks.classList.toggle('nav-open');
+    });
+  }
+
+  const handleLinkClick = (event) => {
+    const link = event.currentTarget;
+    const href = link.getAttribute('href') || '';
+    const target = link.getAttribute('target');
+    if (href.startsWith('#') || target === '_blank') return;
+
+    event.preventDefault();
+    document.body.classList.add('fade-out');
+    setTimeout(() => {
+      window.location.href = href;
+    }, 350);
+  };
+
+  document.querySelectorAll('a[href]').forEach(link => {
+    if (!link.hasAttribute('data-no-transition')) {
+      link.addEventListener('click', handleLinkClick);
+    }
+  });
+
+  const revealElements = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && revealElements.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealElements.forEach(el => observer.observe(el));
+  } else {
+    revealElements.forEach(el => el.classList.add('visible'));
+  }
+})();
+</script>
+</body>
+</html>

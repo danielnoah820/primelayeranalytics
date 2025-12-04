@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>PrimeLayer Analytics – High-Performance Data Analysis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="PrimeLayer Analytics helps founders and teams turn messy spreadsheets into clear, actionable dashboards using Python, SQL and BI tools — with the discipline of an athlete." />
+  <meta name="robots" content="index, follow" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-transition">
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <div class="wrapper navbar">
+    <a href="index.html" class="logo-wrap" aria-label="PrimeLayer Analytics home">
+      <div class="logo-mark"></div>
+      <div class="logo-text">PrimeLayer Analytics</div>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-label="Toggle main navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="index.html" aria-current="page" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+  <!-- HERO -->
+  <section class="hero reveal" aria-labelledby="home-hero-title" style="--reveal-delay: 0.05s;">
+    <div class="wrapper hero-grid">
+      <div>
+        <p class="hero-kicker">Fitness · Finance · Data</p>
+        <h1 id="home-hero-title" class="hero-title">
+          High-Performance
+          <span class="hero-highlight">Data Analysis</span>
+          for Businesses That Want to Win.
+        </h1>
+        <p class="hero-subtitle">
+          I help founders and teams turn messy spreadsheets into clear,
+          actionable dashboards – with the same discipline I apply in the gym:
+          focus, intensity, and results.
+        </p>
+
+        <div class="hero-badges" aria-label="Skills and focus areas">
+          <span class="badge reveal" style="--reveal-delay: 0.18s;">Python · SQL · Power BI</span>
+          <span class="badge reveal" style="--reveal-delay: 0.24s;">Finance & KPI dashboards</span>
+          <span class="badge reveal" style="--reveal-delay: 0.30s;">Remote or in Belgium</span>
+        </div>
+
+        <div class="hero-actions reveal" style="--reveal-delay: 0.35s;">
+          <a href="contact.html" class="btn-primary">
+            Book a free consultation
+            <span aria-hidden="true">→</span>
+          </a>
+          <a href="services.html" class="btn-ghost">
+            See services
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual-wrap reveal" aria-hidden="true" style="--reveal-delay: 0.2s;">
+        <div class="hero-orbit"></div>
+        <div class="hero-image">
+          <img
+            src="img/hero-home.png"
+            alt="Illustration of Daniel training with data dashboards around him"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SHORT VALUE SECTION -->
+  <section class="section reveal" aria-labelledby="why-work-with-me" style="--reveal-delay: 0.1s;">
+    <div class="wrapper">
+      <header class="section-header">
+        <p class="section-kicker">Why work with me</p>
+        <h2 id="why-work-with-me" class="section-title">
+          Discipline of an athlete. Mindset of an analyst.
+        </h2>
+        <p class="section-subtitle">
+          I treat your data like training: we define the objective, remove the
+          noise, focus on the right metrics, and measure progress clearly. No
+          buzzwords, just numbers you can act on.
+        </p>
+      </header>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrapper footer-inner">
+    <p>© <span id="year"></span> Daniel Data. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  // Year
+  const yearSpan = document.getElementById('year');
+  if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+
+  // Page fade-in
+  window.addEventListener('load', function () {
+    document.body.classList.add('page-loaded');
+  });
+
+  // Mobile nav
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', function () {
+      const expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', String(!expanded));
+      navLinks.classList.toggle('nav-open');
+    });
+  }
+
+  // Smooth fade-out on navigation
+  const handleLinkClick = (event) => {
+    const link = event.currentTarget;
+    const href = link.getAttribute('href') || '';
+    const target = link.getAttribute('target');
+
+    // Ignore in-page anchors or new tabs
+    if (href.startsWith('#') || target === '_blank') return;
+
+    event.preventDefault();
+    document.body.classList.add('fade-out');
+
+    setTimeout(() => {
+      window.location.href = href;
+    }, 350);
+  };
+
+  document.querySelectorAll('a[href]').forEach(link => {
+    if (!link.hasAttribute('data-no-transition')) {
+      link.addEventListener('click', handleLinkClick);
+    }
+  });
+
+  // Scroll reveal animations
+  const revealElements = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && revealElements.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealElements.forEach(el => observer.observe(el));
+  } else {
+    // Fallback: show all
+    revealElements.forEach(el => el.classList.add('visible'));
+  }
+})();
+</script>
+</body>
+</html>

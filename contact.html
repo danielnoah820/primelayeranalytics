@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact – PrimeLayer Analytics</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Contact PrimeLayer Analytics to discuss your data project. Share your goals and timelines and get a clear, practical plan to clean, structure and visualize your data." />
+  <meta name="robots" content="index, follow" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="page-transition">
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="site-header">
+  <div class="wrapper navbar">
+    <a href="index.html" class="logo-wrap" aria-label="PrimeLayer Analytics home">
+      <div class="logo-mark"></div>
+      <div class="logo-text">PrimeLayer Analytics</div>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-label="Toggle main navigation" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+
+    <nav class="nav-links" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html" aria-current="page" class="active">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main-content">
+  <section class="hero hero-compact reveal" aria-labelledby="contact-hero-title" style="--reveal-delay: 0.05s;">
+    <div class="wrapper hero-grid hero-grid-single">
+      <div>
+        <p class="hero-kicker">Work with me</p>
+        <h1 id="contact-hero-title" class="hero-title">
+          Ready to put your
+          <span class="hero-highlight">data to work</span>?
+        </h1>
+        <p class="hero-subtitle">
+          Tell me about your data, your goals, and what you want to improve. I’ll
+          review your message and get back to you with clear next steps and a
+          practical plan to move forward.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrapper contact-grid">
+      <form action="#" method="post" novalidate aria-label="Project contact form" class="reveal" style="--reveal-delay: 0.12s;">
+        <div class="form-group">
+          <label for="name">Name<span aria-hidden="true">*</span></label>
+          <input id="name" name="name" type="text" placeholder="Your name" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email<span aria-hidden="true">*</span></label>
+          <input id="email" name="email" type="email" placeholder="you@company.com" required />
+        </div>
+        <div class="form-group">
+          <label for="company">Company</label>
+          <input id="company" name="company" type="text" placeholder="Your company (optional)" />
+        </div>
+        <div class="form-group">
+          <label for="message">Project details<span aria-hidden="true">*</span></label>
+          <textarea
+            id="message"
+            name="message"
+            placeholder="Describe your data, your goals, and your deadline."
+            required
+          ></textarea>
+        </div>
+        <button type="submit" class="btn-primary">
+          Send message
+        </button>
+      </form>
+
+      <aside aria-labelledby="contact-details-title" class="reveal" style="--reveal-delay: 0.22s;">
+        <header class="section-header">
+          <p class="section-kicker">Contact details</p>
+          <h2 id="contact-details-title" class="section-title">Let’s book a short call.</h2>
+        </header>
+        <p class="section-subtitle">
+          I’m based in Mechelen, Belgium and available for remote work across Belgium and
+          internationally. I usually respond within 24 hours. Calls can be scheduled 
+          in English or French.
+        </p>
+        <p class="contact-meta">
+          <strong>Email:</strong> <a href="mailto:danielnoah_data@outlook.com">danielnoah_data@outlook.com</a><br />
+          <strong>Location:</strong> Mechelen, Belgium<br />
+          <strong>Languages:</strong> English · French · (Dutch in progress)
+        </p>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrapper footer-inner">
+    <p>© <span id="year"></span> Daniel Data. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  const yearSpan = document.getElementById('year');
+  if (yearSpan) yearSpan.textContent = new Date().getFullYear();
+
+  window.addEventListener('load', function () {
+    document.body.classList.add('page-loaded');
+  });
+
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', function () {
+      const expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', String(!expanded));
+      navLinks.classList.toggle('nav-open');
+    });
+  }
+
+  const handleLinkClick = (event) => {
+    const link = event.currentTarget;
+    const href = link.getAttribute('href') || '';
+    const target = link.getAttribute('target');
+    if (href.startsWith('#') || target === '_blank') return;
+
+    event.preventDefault();
+    document.body.classList.add('fade-out');
+    setTimeout(() => {
+      window.location.href = href;
+    }, 350);
+  };
+
+  document.querySelectorAll('a[href]').forEach(link => {
+    if (!link.hasAttribute('data-no-transition')) {
+      link.addEventListener('click', handleLinkClick);
+    }
+  });
+
+  const revealElements = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && revealElements.length > 0) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    revealElements.forEach(el => observer.observe(el));
+  } else {
+    revealElements.forEach(el => el.classList.add('visible'));
+  }
+})();
+</script>
+</body>
+</html>
