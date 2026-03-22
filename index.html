@@ -1,170 +1,827 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <title>PrimeLayer Analytics – High-Performance Data Analysis</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="PrimeLayer Analytics helps founders and teams turn messy spreadsheets into clear, actionable dashboards using Python, SQL and BI tools — with the discipline of an athlete." />
-  <meta name="robots" content="index, follow" />
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrimeLayer Analytics — Automatisation Excel & Reporting | PME Belgique</title>
+<meta name="description" content="J'automatise les processus manuels des PME belges — Excel, Reporting, Data. Gagnez 2 à 4h par semaine. Bruxelles et environs.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0F1F3D;
+  --navy-mid: #1F3864;
+  --blue: #2E75B6;
+  --blue-light: #4A9FE0;
+  --accent: #E8A838;
+  --white: #FFFFFF;
+  --off-white: #F7F8FA;
+  --gray: #8892A4;
+  --gray-light: #EEF1F6;
+  --text: #1A2540;
+  --red: #C0392B;
+  --orange: #E67E22;
+  --green: #27AE60;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--white);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 60px;
+  background: rgba(15,31,61,0.97);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.nav-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 18px;
+  color: var(--white); letter-spacing: -0.3px;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  color: rgba(255,255,255,0.65); text-decoration: none;
+  font-size: 14px; font-weight: 400; letter-spacing: 0.2px;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  background: var(--accent); color: var(--navy);
+  padding: 10px 22px; border-radius: 6px;
+  font-size: 13px; font-weight: 600;
+  text-decoration: none; letter-spacing: 0.2px;
+  transition: opacity 0.2s;
+}
+.nav-cta:hover { opacity: 0.88; }
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  background: var(--navy);
+  display: flex; align-items: center;
+  position: relative; overflow: hidden;
+  padding: 120px 60px 80px;
+}
+
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(46,117,182,0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(46,117,182,0.07) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero-glow {
+  position: absolute; top: -200px; right: -200px;
+  width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(46,117,182,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-glow-2 {
+  position: absolute; bottom: -300px; left: -100px;
+  width: 600px; height: 600px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,168,56,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content { position: relative; z-index: 2; max-width: 700px; }
+
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(46,117,182,0.15);
+  border: 1px solid rgba(46,117,182,0.3);
+  color: var(--blue-light); font-size: 13px; font-weight: 500;
+  padding: 6px 14px; border-radius: 20px; margin-bottom: 32px;
+  letter-spacing: 0.3px;
+}
+.hero-tag::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--blue-light); animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.8); }
+}
+
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(42px, 5.5vw, 68px);
+  font-weight: 800; line-height: 1.06;
+  color: var(--white); letter-spacing: -1.5px;
+  margin-bottom: 28px;
+}
+h1 em { color: var(--accent); font-style: normal; }
+
+.hero-sub {
+  font-size: 18px; line-height: 1.7;
+  color: rgba(255,255,255,0.6);
+  max-width: 520px; margin-bottom: 44px;
+  font-weight: 300;
+}
+
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+.btn-primary {
+  background: var(--accent); color: var(--navy);
+  padding: 14px 28px; border-radius: 7px;
+  font-size: 15px; font-weight: 600;
+  text-decoration: none; letter-spacing: 0.1px;
+  transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-primary:hover { background: #f0b840; transform: translateY(-1px); }
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.8);
+  padding: 14px 28px; border-radius: 7px;
+  font-size: 15px; font-weight: 400;
+  text-decoration: none; letter-spacing: 0.1px;
+  transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: var(--white); }
+
+.hero-stats {
+  display: flex; gap: 40px; margin-top: 60px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.stat-item {}
+.stat-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 32px; font-weight: 800;
+  color: var(--white); letter-spacing: -0.5px;
+}
+.stat-num span { color: var(--accent); }
+.stat-label { font-size: 13px; color: rgba(255,255,255,0.45); margin-top: 4px; }
+
+/* ── SECTION BASE ── */
+section { padding: 100px 60px; }
+.section-label {
+  font-size: 12px; font-weight: 600; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--blue);
+  margin-bottom: 14px;
+}
+h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 800; line-height: 1.1;
+  letter-spacing: -1px; color: var(--navy);
+  margin-bottom: 20px;
+}
+h2 em { color: var(--blue); font-style: normal; }
+.section-sub {
+  font-size: 17px; color: var(--gray);
+  line-height: 1.7; max-width: 560px;
+  font-weight: 300;
+}
+
+/* ── PROBLEM ── */
+#problem { background: var(--off-white); }
+.problem-inner { max-width: 1100px; margin: 0 auto; }
+.problem-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center; margin-top: 60px;
+}
+.problem-text h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px; font-weight: 700; color: var(--navy);
+  margin-bottom: 16px; letter-spacing: -0.5px;
+}
+.problem-text p {
+  font-size: 16px; color: var(--gray); line-height: 1.8;
+  margin-bottom: 24px; font-weight: 300;
+}
+.problem-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.problem-list li {
+  display: flex; align-items: flex-start; gap: 14px;
+  font-size: 15px; color: var(--text); line-height: 1.5;
+}
+.problem-list li::before {
+  content: '×'; font-size: 18px; font-weight: 700;
+  color: var(--red); flex-shrink: 0; line-height: 1.2;
+}
+
+.problem-visual {
+  background: var(--white);
+  border-radius: 16px; padding: 32px;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.06);
+  border: 1px solid var(--gray-light);
+}
+.excel-row {
+  display: grid; grid-template-columns: 100px 1fr 80px 80px 90px;
+  gap: 1px; margin-bottom: 1px;
+}
+.excel-cell {
+  padding: 8px 10px; font-size: 12px;
+  background: var(--off-white); color: var(--text);
+  font-family: 'Courier New', monospace;
+}
+.excel-cell.header {
+  background: #1F3864; color: white; font-weight: 600;
+  font-family: 'DM Sans', sans-serif; font-size: 11px;
+}
+.excel-cell.red { background: #FDECEA; color: #C00000; font-weight: 600; }
+.excel-cell.orange { background: #FFF3CD; color: #7A4F00; font-weight: 600; }
+.excel-cell.green { background: #E2EFDA; color: #375623; font-weight: 600; }
+.excel-label {
+  font-size: 11px; color: var(--gray); margin-top: 16px;
+  text-align: center; font-style: italic;
+}
+
+/* ── SERVICES ── */
+#services { background: var(--white); }
+.services-inner { max-width: 1100px; margin: 0 auto; }
+.services-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-top: 60px;
+}
+.service-card {
+  background: var(--off-white);
+  border: 1px solid var(--gray-light);
+  border-radius: 16px; padding: 36px 30px;
+  transition: all 0.25s; position: relative; overflow: hidden;
+}
+.service-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 3px; background: var(--blue);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s;
+}
+.service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
+.service-card:hover::before { transform: scaleX(1); }
+
+.service-icon {
+  width: 48px; height: 48px; border-radius: 12px;
+  background: rgba(46,117,182,0.1);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px; font-size: 22px;
+}
+.service-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px; font-weight: 700;
+  color: var(--navy); margin-bottom: 12px; letter-spacing: -0.3px;
+}
+.service-card p {
+  font-size: 14px; color: var(--gray);
+  line-height: 1.7; font-weight: 300;
+}
+.service-result {
+  margin-top: 20px; padding-top: 20px;
+  border-top: 1px solid var(--gray-light);
+  font-size: 13px; font-weight: 500; color: var(--blue);
+}
+
+/* ── HOW IT WORKS ── */
+#process { background: var(--navy); }
+.process-inner { max-width: 1100px; margin: 0 auto; }
+#process .section-label { color: var(--accent); }
+#process h2 { color: var(--white); }
+#process h2 em { color: var(--accent); }
+#process .section-sub { color: rgba(255,255,255,0.5); }
+
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 60px; }
+.step {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 16px; padding: 32px 26px;
+  position: relative; transition: background 0.2s;
+}
+.step:hover { background: rgba(46,117,182,0.08); }
+.step-num {
+  font-family: 'Syne', sans-serif;
+  font-size: 48px; font-weight: 800;
+  color: rgba(46,117,182,0.2); line-height: 1;
+  margin-bottom: 20px;
+}
+.step h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 17px; font-weight: 700;
+  color: var(--white); margin-bottom: 10px;
+}
+.step p { font-size: 14px; color: rgba(255,255,255,0.45); line-height: 1.7; font-weight: 300; }
+
+/* ── PRICING ── */
+#pricing { background: var(--off-white); }
+.pricing-inner { max-width: 1000px; margin: 0 auto; }
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-top: 60px;
+}
+.pricing-card {
+  background: var(--white);
+  border: 1px solid var(--gray-light);
+  border-radius: 16px; padding: 36px 28px;
+  transition: all 0.25s;
+}
+.pricing-card.featured {
+  background: var(--navy);
+  border-color: var(--blue);
+  transform: scale(1.03);
+  box-shadow: 0 20px 60px rgba(15,31,61,0.2);
+}
+.pricing-tag {
+  display: inline-block;
+  background: var(--accent); color: var(--navy);
+  font-size: 11px; font-weight: 700; letter-spacing: 1px;
+  padding: 4px 10px; border-radius: 4px;
+  text-transform: uppercase; margin-bottom: 20px;
+}
+.pricing-name {
+  font-family: 'Syne', sans-serif;
+  font-size: 20px; font-weight: 700;
+  color: var(--navy); margin-bottom: 8px;
+}
+.pricing-card.featured .pricing-name { color: var(--white); }
+.pricing-price {
+  font-family: 'Syne', sans-serif;
+  font-size: 42px; font-weight: 800;
+  color: var(--navy); letter-spacing: -1px;
+  margin-bottom: 6px;
+}
+.pricing-card.featured .pricing-price { color: var(--white); }
+.pricing-price span { font-size: 16px; font-weight: 400; color: var(--gray); }
+.pricing-card.featured .pricing-price span { color: rgba(255,255,255,0.5); }
+.pricing-desc {
+  font-size: 13px; color: var(--gray); margin-bottom: 24px;
+  line-height: 1.5; font-weight: 300;
+}
+.pricing-card.featured .pricing-desc { color: rgba(255,255,255,0.5); }
+.pricing-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; }
+.pricing-features li {
+  font-size: 14px; color: var(--text);
+  display: flex; align-items: flex-start; gap: 10px; line-height: 1.4;
+}
+.pricing-card.featured .pricing-features li { color: rgba(255,255,255,0.75); }
+.pricing-features li::before {
+  content: '✓'; color: var(--green);
+  font-weight: 700; flex-shrink: 0;
+}
+.pricing-btn {
+  display: block; text-align: center;
+  padding: 13px; border-radius: 8px;
+  font-size: 14px; font-weight: 600;
+  text-decoration: none; transition: all 0.2s;
+  border: 1.5px solid var(--navy); color: var(--navy);
+}
+.pricing-btn:hover { background: var(--navy); color: var(--white); }
+.pricing-card.featured .pricing-btn {
+  background: var(--accent); border-color: var(--accent); color: var(--navy);
+}
+.pricing-card.featured .pricing-btn:hover { opacity: 0.88; }
+
+/* ── ABOUT ── */
+#about { background: var(--white); }
+.about-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1.2fr;
+  gap: 80px; align-items: center;
+}
+.about-left {}
+.about-photo-wrap {
+  position: relative; display: inline-block;
+}
+.about-photo {
+  width: 280px; height: 340px; object-fit: cover;
+  border-radius: 20px; display: block;
+  background: var(--gray-light);
+}
+.about-photo-placeholder {
+  width: 280px; height: 340px; border-radius: 20px;
+  background: linear-gradient(135deg, var(--navy-mid), var(--blue));
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 12px;
+}
+.about-photo-placeholder .initials {
+  font-family: 'Syne', sans-serif;
+  font-size: 64px; font-weight: 800; color: white; opacity: 0.9;
+}
+.about-photo-placeholder .name-text {
+  font-size: 14px; color: rgba(255,255,255,0.6); letter-spacing: 1px;
+}
+.about-badge {
+  position: absolute; bottom: -16px; right: -16px;
+  background: var(--accent); color: var(--navy);
+  padding: 12px 18px; border-radius: 10px;
+  font-family: 'Syne', sans-serif;
+  font-size: 13px; font-weight: 700;
+  box-shadow: 0 8px 24px rgba(232,168,56,0.3);
+}
+
+.about-right h2 { margin-bottom: 12px; }
+.about-right .section-label { margin-bottom: 10px; }
+.about-right p {
+  font-size: 16px; color: var(--gray); line-height: 1.8;
+  margin-bottom: 20px; font-weight: 300;
+}
+.about-right p strong { color: var(--text); font-weight: 500; }
+.about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+.about-tag {
+  background: var(--off-white); border: 1px solid var(--gray-light);
+  color: var(--navy); font-size: 13px; font-weight: 500;
+  padding: 6px 14px; border-radius: 20px;
+}
+
+/* ── CTA ── */
+#cta {
+  background: var(--navy);
+  text-align: center; padding: 100px 60px;
+}
+.cta-inner { max-width: 680px; margin: 0 auto; }
+#cta .section-label { color: var(--accent); justify-content: center; display: flex; }
+#cta h2 { color: var(--white); margin-bottom: 20px; }
+#cta p { font-size: 17px; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 44px; font-weight: 300; }
+.cta-email {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: rgba(46,117,182,0.12); border: 1px solid rgba(46,117,182,0.3);
+  color: var(--blue-light); padding: 14px 24px; border-radius: 10px;
+  font-size: 16px; text-decoration: none; margin-bottom: 20px;
+  transition: all 0.2s;
+}
+.cta-email:hover { background: rgba(46,117,182,0.2); }
+.cta-note { font-size: 13px; color: rgba(255,255,255,0.3); margin-top: 16px; }
+
+/* ── FOOTER ── */
+footer {
+  background: #080F1E;
+  padding: 36px 60px;
+  display: flex; align-items: center; justify-content: space-between;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.footer-logo {
+  font-family: 'Syne', sans-serif;
+  font-weight: 800; font-size: 16px;
+  color: rgba(255,255,255,0.5);
+}
+.footer-logo span { color: var(--accent); }
+.footer-links { display: flex; gap: 28px; }
+.footer-links a {
+  font-size: 13px; color: rgba(255,255,255,0.3);
+  text-decoration: none; transition: color 0.2s;
+}
+.footer-links a:hover { color: rgba(255,255,255,0.7); }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.2); }
+
+/* ── ANIMATIONS ── */
+.fade-up {
+  opacity: 0; transform: translateY(24px);
+  animation: fadeUp 0.7s ease forwards;
+}
+.fade-up:nth-child(1) { animation-delay: 0.1s; }
+.fade-up:nth-child(2) { animation-delay: 0.25s; }
+.fade-up:nth-child(3) { animation-delay: 0.4s; }
+.fade-up:nth-child(4) { animation-delay: 0.55s; }
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  section { padding: 70px 24px; }
+  #hero { padding: 100px 24px 70px; }
+  .hero-stats { gap: 24px; flex-wrap: wrap; }
+  .problem-grid, .about-inner { grid-template-columns: 1fr; gap: 40px; }
+  .services-grid, .steps, .pricing-grid { grid-template-columns: 1fr; }
+  .pricing-card.featured { transform: none; }
+  footer { flex-direction: column; gap: 16px; text-align: center; }
+  .footer-links { flex-wrap: wrap; justify-content: center; }
+}
+</style>
 </head>
-<body class="page-transition">
-<a href="#main-content" class="skip-link">Skip to main content</a>
+<body>
 
-<header class="site-header">
-  <div class="wrapper navbar">
-    <a href="index.html" class="logo-wrap" aria-label="PrimeLayer Analytics home">
-      <div class="logo-mark"></div>
-      <div class="logo-text">PrimeLayer Analytics</div>
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Prime<span>Layer</span></div>
+  <ul class="nav-links">
+    <li><a href="#problem">Le problème</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Tarifs</a></li>
+    <li><a href="#about">À propos</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">Audit gratuit →</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow-2"></div>
+  <div class="hero-content">
+    <div class="hero-tag fade-up">Disponible en Belgique — Bruxelles & environs</div>
+    <h1 class="fade-up">Vos données.<br>Automatisées.<br><em>Enfin.</em></h1>
+    <p class="hero-sub fade-up">J'automatise les processus manuels des PME belges — reportings Excel, nettoyage de données, dashboards. Gagnez 2 à 4h par semaine dès la première semaine.</p>
+    <div class="hero-actions fade-up">
+      <a href="#cta" class="btn-primary">Audit gratuit 30 min →</a>
+      <a href="#services" class="btn-ghost">Voir les services</a>
+    </div>
+    <div class="hero-stats fade-up">
+      <div class="stat-item">
+        <div class="stat-num">2–4<span>h</span></div>
+        <div class="stat-label">récupérées par semaine</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">0<span>€</span></div>
+        <div class="stat-label">logiciel supplémentaire</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">1<span>j</span></div>
+        <div class="stat-label">pour les premiers résultats</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="problem-inner">
+    <div class="section-label">Le problème</div>
+    <h2>Votre Excel vous coûte<br><em>des heures chaque semaine</em></h2>
+    <div class="problem-grid">
+      <div class="problem-text">
+        <h3>Ce que je vois chez la plupart des PME</h3>
+        <p>Des fichiers Excel créés il y a des années, modifiés par plusieurs personnes, que seule une personne comprend vraiment. Quand cette personne est absente — c'est le chaos.</p>
+        <ul class="problem-list">
+          <li>Rapports reconstruits manuellement chaque semaine</li>
+          <li>Données éparpillées dans des fichiers sans lien</li>
+          <li>Aucune alerte — les ruptures arrivent par surprise</li>
+          <li>Impossible de savoir l'état réel en temps réel</li>
+          <li>Formation requise pour chaque nouvel employé</li>
+          <li>Erreurs de saisie qui coûtent du temps et de l'argent</li>
+        </ul>
+      </div>
+      <div class="problem-visual">
+        <div class="excel-row">
+          <div class="excel-cell header">Produit</div>
+          <div class="excel-cell header">Catégorie</div>
+          <div class="excel-cell header">Stock</div>
+          <div class="excel-cell header">Seuil</div>
+          <div class="excel-cell header">Statut</div>
+        </div>
+        <div class="excel-row">
+          <div class="excel-cell">Palettes bois</div>
+          <div class="excel-cell">Logistique</div>
+          <div class="excel-cell">8</div>
+          <div class="excel-cell">25</div>
+          <div class="excel-cell orange">Faible</div>
+        </div>
+        <div class="excel-row">
+          <div class="excel-cell">Casques sécu.</div>
+          <div class="excel-cell">Sécurité</div>
+          <div class="excel-cell">0</div>
+          <div class="excel-cell">10</div>
+          <div class="excel-cell red">Rupture</div>
+        </div>
+        <div class="excel-row">
+          <div class="excel-cell">Film étirable</div>
+          <div class="excel-cell">Emballage</div>
+          <div class="excel-cell">35</div>
+          <div class="excel-cell">15</div>
+          <div class="excel-cell green">OK</div>
+        </div>
+        <div class="excel-row">
+          <div class="excel-cell">Gasoil (L)</div>
+          <div class="excel-cell">Carburant</div>
+          <div class="excel-cell">320</div>
+          <div class="excel-cell">200</div>
+          <div class="excel-cell green">OK</div>
+        </div>
+        <div class="excel-row">
+          <div class="excel-cell">Sangles arrimage</div>
+          <div class="excel-cell">Logistique</div>
+          <div class="excel-cell">28</div>
+          <div class="excel-cell">40</div>
+          <div class="excel-cell orange">Faible</div>
+        </div>
+        <p class="excel-label">Alertes automatiques — rouge = commander en urgence</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="services-inner">
+    <div class="section-label">Ce que je fais</div>
+    <h2>Des solutions concrètes,<br><em>pas du jargon</em></h2>
+    <p class="section-sub">Chaque intervention est adaptée à votre situation réelle. Pas de logiciel à acheter, pas de formation complexe.</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">📊</div>
+        <h3>Automatisation Excel & Reporting</h3>
+        <p>Vos rapports hebdomadaires ou mensuels se génèrent en 1 clic. Plus de copier-coller, plus de mise en forme manuelle, plus d'erreurs.</p>
+        <div class="service-result">→ Gain typique : 2–3h/semaine</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🧹</div>
+        <h3>Nettoyage & structuration de données</h3>
+        <p>Doublons, formats incohérents, données manquantes — je transforme vos fichiers en bases de données propres, fiables et exploitables.</p>
+        <div class="service-result">→ Fiabilité des données : +90%</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">📈</div>
+        <h3>Dashboards Power BI & Excel</h3>
+        <p>Un tableau de bord que votre équipe ouvre chaque matin. KPIs en temps réel, graphiques automatiques, vue d'ensemble instantanée.</p>
+        <div class="service-result">→ Décision en 10 secondes</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">⚙️</div>
+        <h3>Scripts Python & automatisation</h3>
+        <p>Fusion de fichiers, extraction de données, envoi automatique de rapports par email — les tâches répétitives tournent seules.</p>
+        <div class="service-result">→ Tâches répétitives éliminées</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🔗</div>
+        <h3>Consolidation multi-sources</h3>
+        <p>Vous avez des données dans 5 fichiers différents ? Je les relie en un système cohérent — mise à jour automatique, vue centralisée.</p>
+        <div class="service-result">→ Un seul fichier de référence</div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🎓</div>
+        <h3>Formation Excel avancée</h3>
+        <p>Je forme votre équipe aux formules et techniques qui leur feront gagner du temps au quotidien — sessions courtes et pratiques.</p>
+        <div class="service-result">→ Autonomie immédiate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section id="process">
+  <div class="process-inner">
+    <div class="section-label">Comment ça marche</div>
+    <h2>Simple, rapide,<br><em>sans friction</em></h2>
+    <p class="section-sub" style="color:rgba(255,255,255,0.45);">De la prise de contact aux premiers résultats — souvent en moins d'une semaine.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Audit gratuit</h3>
+        <p>30 minutes pour comprendre vos processus actuels et identifier les gains rapides. Aucun engagement.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Proposition claire</h3>
+        <p>Une proposition en 24h avec le périmètre exact, le délai et le tarif. Pas de surprise.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Livraison rapide</h3>
+        <p>La plupart des projets sont livrés en 1 à 5 jours. Vous testez, vous validez, on ajuste.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h3>Autonomie totale</h3>
+        <p>Je vous explique comment utiliser le fichier. Vous n'avez plus besoin de moi pour le faire tourner.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="pricing-inner">
+    <div class="section-label">Tarifs</div>
+    <h2>Transparent,<br><em>sans surprise</em></h2>
+    <p class="section-sub">Des forfaits adaptés aux PME. Vous savez exactement ce que vous achetez avant de commencer.</p>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-name">Starter</div>
+        <div class="pricing-price">300<span>€</span></div>
+        <div class="pricing-desc">Pour un problème précis et rapide à résoudre</div>
+        <ul class="pricing-features">
+          <li>1 rapport ou fichier automatisé</li>
+          <li>Livraison en 3 à 5 jours</li>
+          <li>1 révision incluse</li>
+          <li>Explication à la livraison</li>
+        </ul>
+        <a href="#cta" class="pricing-btn">Démarrer →</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-tag">Recommandé</div>
+        <div class="pricing-name">Standard</div>
+        <div class="pricing-price">700<span>€</span></div>
+        <div class="pricing-desc">Pour un système complet avec dashboard</div>
+        <ul class="pricing-features">
+          <li>Jusqu'à 3 rapports automatisés</li>
+          <li>Dashboard Excel ou Power BI</li>
+          <li>Livraison en 5 à 10 jours</li>
+          <li>2 révisions incluses</li>
+          <li>Support 2 semaines post-livraison</li>
+        </ul>
+        <a href="#cta" class="pricing-btn">Démarrer →</a>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-name">Pro</div>
+        <div class="pricing-price">1500<span>€</span></div>
+        <div class="pricing-desc">Pour une automatisation complète de vos processus</div>
+        <ul class="pricing-features">
+          <li>Système complet multi-onglets</li>
+          <li>Automatisation Python incluse</li>
+          <li>Dashboard interactif</li>
+          <li>Livraison en 10 à 15 jours</li>
+          <li>Support 1 mois post-livraison</li>
+        </ul>
+        <a href="#cta" class="pricing-btn">Démarrer →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-left">
+      <div class="about-photo-wrap">
+        <div class="about-photo-placeholder">
+          <div class="initials">DN</div>
+          <div class="name-text">DANIEL NOAH</div>
+        </div>
+        <div class="about-badge">Mechelen, Belgique</div>
+      </div>
+    </div>
+    <div class="about-right">
+      <div class="section-label">À propos</div>
+      <h2>Daniel Noah</h2>
+      <p>Je suis consultant en automatisation de données, basé à Mechelen. Je travaille avec des <strong>PME belges</strong> qui perdent trop de temps sur des processus manuels qu'Excel peut automatiser.</p>
+      <p>Mon approche : comprendre votre réalité opérationnelle, livrer rapidement, et vous rendre <strong>totalement autonome</strong>. Pas de dépendance, pas d'abonnement, pas de formation interminable.</p>
+      <p>Étudiant en Master Management à <strong>HEC Liège</strong>, spécialité Banking & Asset Management. Je combине une formation analytique rigoureuse avec une expérience terrain concrète.</p>
+      <div class="about-tags">
+        <span class="about-tag">Microsoft Excel</span>
+        <span class="about-tag">Power BI</span>
+        <span class="about-tag">Python</span>
+        <span class="about-tag">Data Cleaning</span>
+        <span class="about-tag">Reporting</span>
+        <span class="about-tag">Automatisation</span>
+        <span class="about-tag">FR · NL · EN</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-inner">
+    <div class="section-label">Contact</div>
+    <h2>Commençons par<br><em>30 minutes gratuites</em></h2>
+    <p>Un audit flash pour comprendre votre situation et identifier les gains rapides. Si le ROI n'est pas évident — on s'arrête là, sans engagement.</p>
+    <br>
+    <a href="https://www.linkedin.com/in/daniel-noah-a127591b3" class="btn-primary" style="display:inline-flex; margin-bottom:16px;">
+      Me contacter sur LinkedIn →
     </a>
-
-    <button class="nav-toggle" type="button" aria-label="Toggle main navigation" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-
-    <nav class="nav-links" aria-label="Main navigation">
-      <a href="index.html" aria-current="page" class="active">Home</a>
-      <a href="about.html">About</a>
-      <a href="services.html">Services</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+    <br>
+    <a href="https://www.malt.be/profile/danielnoah" class="btn-ghost" style="display:inline-flex;">
+      Mon profil Malt
+    </a>
+    <p class="cta-note">Disponible en région bruxelloise et à distance · Réponse sous 24h</p>
   </div>
-</header>
+</section>
 
-<main id="main-content">
-  <!-- HERO -->
-  <section class="hero reveal" aria-labelledby="home-hero-title" style="--reveal-delay: 0.05s;">
-    <div class="wrapper hero-grid">
-      <div>
-        <p class="hero-kicker">Finance · Data</p>
-        <h1 id="home-hero-title" class="hero-title">
-          High-Performance
-          <span class="hero-highlight">Data Analysis</span>
-          for Businesses That Want to Win.
-        </h1>
-        <p class="hero-subtitle">
-          I help founders and teams turn messy spreadsheets into clear,
-          actionable dashboards – with the same discipline I apply in the gym:
-          focus, intensity, and results.
-        </p>
-
-        <div class="hero-badges" aria-label="Skills and focus areas">
-          <span class="badge reveal" style="--reveal-delay: 0.18s;">Python · SQL · Power BI</span>
-          <span class="badge reveal" style="--reveal-delay: 0.24s;">Finance & KPI dashboards</span>
-          <span class="badge reveal" style="--reveal-delay: 0.30s;">Remote or in Belgium</span>
-        </div>
-
-        <div class="hero-actions reveal" style="--reveal-delay: 0.35s;">
-          <a href="contact.html" class="btn-primary">
-            Book a free consultation
-            <span aria-hidden="true">→</span>
-          </a>
-          <a href="services.html" class="btn-ghost">
-            See services
-          </a>
-        </div>
-      </div>
-
-      <div class="hero-visual-wrap reveal" aria-hidden="true" style="--reveal-delay: 0.2s;">
-        <div class="hero-orbit"></div>
-        <div class="hero-image">
-          <img
-            src="hero-home.png"
-            alt="Illustration of Daniel training with data dashboards around him"
-            loading="lazy"
-          />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- SHORT VALUE SECTION -->
-  <section class="section reveal" aria-labelledby="why-work-with-me" style="--reveal-delay: 0.1s;">
-    <div class="wrapper">
-      <header class="section-header">
-        <p class="section-kicker">Why work with me</p>
-        <h2 id="why-work-with-me" class="section-title">
-          Discipline of an athlete. Mindset of an analyst.
-        </h2>
-        <p class="section-subtitle">
-          I treat your data like training: we define the objective, remove the
-          noise, focus on the right metrics, and measure progress clearly. No
-          buzzwords, just numbers you can act on.
-        </p>
-      </header>
-    </div>
-  </section>
-</main>
-
+<!-- FOOTER -->
 <footer>
-  <div class="wrapper footer-inner">
-    <p>© <span id="year"></span> Daniel Data. All rights reserved.</p>
+  <div class="footer-logo">Prime<span>Layer</span> Analytics</div>
+  <div class="footer-links">
+    <a href="#problem">Le problème</a>
+    <a href="#services">Services</a>
+    <a href="#pricing">Tarifs</a>
+    <a href="#about">À propos</a>
+    <a href="#cta">Contact</a>
   </div>
+  <div class="footer-copy">© 2025 PrimeLayer Analytics · Mechelen, Belgique</div>
 </footer>
 
 <script>
-(function () {
-  // Year
-  const yearSpan = document.getElementById('year');
-  if (yearSpan) yearSpan.textContent = new Date().getFullYear();
-
-  // Page fade-in
-  window.addEventListener('load', function () {
-    document.body.classList.add('page-loaded');
-  });
-
-  // Mobile nav
-  const navToggle = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', function () {
-      const expanded = this.getAttribute('aria-expanded') === 'true';
-      this.setAttribute('aria-expanded', String(!expanded));
-      navLinks.classList.toggle('nav-open');
-    });
-  }
-
-  // Smooth fade-out on navigation
-  const handleLinkClick = (event) => {
-    const link = event.currentTarget;
-    const href = link.getAttribute('href') || '';
-    const target = link.getAttribute('target');
-
-    // Ignore in-page anchors or new tabs
-    if (href.startsWith('#') || target === '_blank') return;
-
-    event.preventDefault();
-    document.body.classList.add('fade-out');
-
-    setTimeout(() => {
-      window.location.href = href;
-    }, 350);
-  };
-
-  document.querySelectorAll('a[href]').forEach(link => {
-    if (!link.hasAttribute('data-no-transition')) {
-      link.addEventListener('click', handleLinkClick);
+// Intersection observer for scroll animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(el => {
+    if (el.isIntersecting) {
+      el.target.style.opacity = '1';
+      el.target.style.transform = 'translateY(0)';
     }
   });
+}, { threshold: 0.1 });
 
-  // Scroll reveal animations
-  const revealElements = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && revealElements.length > 0) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.15 });
-
-    revealElements.forEach(el => observer.observe(el));
-  } else {
-    // Fallback: show all
-    revealElements.forEach(el => el.classList.add('visible'));
-  }
-})();
+document.querySelectorAll('.service-card, .step, .pricing-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
 </script>
 </body>
 </html>
